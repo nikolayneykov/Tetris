@@ -4,7 +4,8 @@ const arena = createMatrix(12, 20);
 const player = {
     pos: { x: 0, y: 0 },
     matrix: null,
-    score: 0
+    score: 0,
+    bestScore: 0,
 }
 
 context.scale(20, 20);
@@ -35,7 +36,11 @@ function update(time = 0) {
 }
 
 function updateScore() {
-    document.getElementById('score').innerText = player.score;
+    if (player.bestScore < player.score) {
+        player.bestScore = player.score;
+    }
+    document.getElementById('score').innerText =
+        `Score:(${player.score}) Record:(${player.bestScore})`
 }
 
 document.addEventListener('keydown', event => {
